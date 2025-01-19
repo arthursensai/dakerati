@@ -3,6 +3,7 @@ import AyahCard from './AyahCard';
 import ShareProgress from './ShareProgress';
 import AyahDetails from './AyahDetails';
 import NotificationSettings from './NotificationSettings';
+import Feedback from './Feedback';
 import { motion, AnimatePresence } from 'framer-motion';
 
 const SURAHS = [
@@ -11,14 +12,24 @@ const SURAHS = [
     "هود", "يوسف", "الرعد", "إبراهيم", "الحجر",
     "النحل", "الإسراء", "الكهف", "مريم", "طه",
     "الأنبياء", "الحج", "المؤمنون", "الفرقان", "الشعراء",
-    "النمل", "العنكبوت", "الروم", "لقمان", "السجدة",
-    "الأحزاب", "يس", "الصافات", "فصلت", "الشورى",
-    "الزخرف", "الدخان", "الجاثية", "الأحقاف", "محمد",
-    "الفتح", "الحجرات", "ق", "الذاريات", "الطور",
-    "النجم", "القمر", "الرحمن", "الواقعة", "الحديد",
-    "المجادلة", "الطلاق", "التحريم", "الملك", "القلم",
-    "الحاقة", "المؤمن", "فصلت", "الزمر", "غافر",
-    "فصلت", "الحديد", "الأعراف", "الكرامة", "التوراة"
+    "النمل", "القصص", "العنكبوت", "الروم", "لقمان",
+    "السجدة", "الأحزاب", "سبأ", "فاطر", "يس",
+    "الصافات", "ص", "الزمر", "غافر", "فصلت",
+    "الشورى", "الزخرف", "الدخان", "الجاثية", "الأحقاف",
+    "محمد", "الفتح", "الحجرات", "ق", "الذاريات",
+    "الطور", "النجم", "القمر", "الرحمن", "الواقعة",
+    "الحديد", "المجادلة", "الحشر", "الممتحنة", "الصف",
+    "الجمعة", "المنافقون", "التغابن", "الطلاق", "التحريم",
+    "الملك", "القلم", "الحاقة", "المعارج", "نوح",
+    "الجن", "المزمل", "المدثر", "القيامة", "الإنسان",
+    "المرسلات", "النبأ", "النازعات", "عبس", "التكوير",
+    "الانفطار", "المطففين", "الانشقاق", "البروج", "الطارق",
+    "الأعلى", "الغاشية", "الفجر", "البلد", "الشمس",
+    "الليل", "الضحى", "الشرح", "التين", "العلق",
+    "القدر", "البينة", "الزلزلة", "العاديات", "القارعة",
+    "التكاثر", "العصر", "الهمزة", "الفيل", "قريش",
+    "الماعون", "الكوثر", "الكافرون", "النصر", "المسد",
+    "الإخلاص", "الفلق", "الناس"
   ];
   
 const normalizeArabicText = (text) => {
@@ -42,6 +53,7 @@ const Game = () => {
   const [showShare, setShowShare] = useState(false);
   const [showAyahDetails, setShowAyahDetails] = useState(false);
   const [showNotificationSettings, setShowNotificationSettings] = useState(false);
+  const [showFeedback, setShowFeedback] = useState(false);
   const [currentAyah, setCurrentAyah] = useState(null);
   const [options, setOptions] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -227,8 +239,8 @@ const Game = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-[#1A1A1A] to-[#0A0A0A] text-white">
-      <div className="container mx-auto px-4 py-8 relative">
+    <div className="min-h-screen bg-gradient-to-b from-[#1A1A1A] to-[#0A0A0A] text-white flex flex-col">
+      <div className="container mx-auto px-4 py-8 relative flex-grow">
         <div className="absolute top-4 right-4 z-10">
           <button
             onClick={() => setShowNotificationSettings(true)}
@@ -236,6 +248,17 @@ const Game = () => {
           >
             <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />
+            </svg>
+          </button>
+        </div>
+
+        <div className="absolute top-4 left-4 z-10">
+          <button
+            onClick={() => setShowFeedback(true)}
+            className="bg-[#2A2A2A] hover:bg-[#3A3A3A] text-white p-2 rounded-lg transition-colors"
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 8h10M7 12h4m1 8l-4-4H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-3l-4 4z" />
             </svg>
           </button>
         </div>
@@ -271,7 +294,7 @@ const Game = () => {
           {showAyahDetails && currentAyah && (
             <AyahDetails
               ayah={currentAyah}
-              onClose={handleCloseAyahDetails}
+              onClose={() => setShowAyahDetails(false)}
             />
           )}
           {showNotificationSettings && (
@@ -279,8 +302,24 @@ const Game = () => {
               onClose={() => setShowNotificationSettings(false)}
             />
           )}
+          {showFeedback && (
+            <Feedback
+              onClose={() => setShowFeedback(false)}
+            />
+          )}
         </AnimatePresence>
       </div>
+
+      <footer className="w-full py-3 sm:py-4 text-center text-zinc-500 text-xs sm:text-sm bg-[#1A1A1A]/50 backdrop-blur-sm">
+        Made with ❤️ by <a 
+          href="https://www.instagram.com/arthur_sensai/" 
+          target="_blank" 
+          rel="noopener noreferrer" 
+          className="hover:text-white transition-colors"
+        >
+          Arthur Sensai
+        </a>
+      </footer>
     </div>
   );
 };

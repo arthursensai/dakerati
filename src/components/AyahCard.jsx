@@ -75,30 +75,30 @@ const AyahCard = ({ ayahData, options, onNext, onCorrectAnswer, onWrongAnswer })
 
   return (
     <motion.div 
-      className="bg-[#1A1A1A] rounded-2xl p-8 backdrop-blur-sm"
+      className="bg-[#1A1A1A] rounded-xl sm:rounded-2xl p-4 sm:p-8 backdrop-blur-sm"
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, y: -20 }}
     >
-      <div className="mb-8">
-        <div className="mb-6">
+      <div className="mb-6 sm:mb-8">
+        <div className="mb-4 sm:mb-6">
           <AudioPlayer src={ayahData.audio} />
         </div>
-        <h2 className="text-2xl mb-4 font-arabic text-center leading-loose">
+        <h2 className="text-lg sm:text-2xl mb-3 sm:mb-4 font-arabic text-center leading-loose">
           {ayahData.text}
         </h2>
-        <p className="text-zinc-400 text-center">
+        <p className="text-zinc-400 text-center text-sm sm:text-base">
           اختر اسم السورة التي تنتمي إليها هذه الآية
         </p>
       </div>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+      <div className="grid grid-cols-1 gap-3 sm:gap-4">
         {options.map((option, index) => (
           <motion.button
             key={index}
             onClick={() => handleOptionClick(option)}
             className={`
-              p-4 rounded-xl text-lg transition-all duration-300
+              p-3 sm:p-4 rounded-lg sm:rounded-xl text-base sm:text-lg transition-all duration-300
               ${getButtonStyle(option)}
               border
             `}
@@ -113,13 +113,13 @@ const AyahCard = ({ ayahData, options, onNext, onCorrectAnswer, onWrongAnswer })
 
       {showResult && (
         <motion.div 
-          className="mt-6 flex justify-center"
+          className="mt-4 sm:mt-6 flex justify-center"
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
         >
           <button
             onClick={handleNextClick}
-            className="bg-gradient-to-r from-violet-600 to-fuchsia-600 hover:from-violet-700 hover:to-fuchsia-700 text-white px-8 py-3 rounded-xl font-bold shadow-lg transition-all duration-300"
+            className="bg-gradient-to-r from-violet-600 to-fuchsia-600 hover:from-violet-700 hover:to-fuchsia-700 text-white px-6 sm:px-8 py-2 sm:py-3 rounded-lg sm:rounded-xl font-bold shadow-lg transition-all duration-300 text-sm sm:text-base"
           >
             السؤال التالي
           </button>
