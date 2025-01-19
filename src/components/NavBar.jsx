@@ -3,7 +3,7 @@ import { useAuth } from '../contexts/AuthContext';
 import { motion, AnimatePresence } from 'framer-motion';
 import AccountSettings from './Account/AccountSettings';
 import ProfileSettings from './Account/ProfileSettings';
-
+import LoginModal from './Auth/Login';
 const NavBar = ({ score, highScore, streak }) => {
   const { user, logout } = useAuth();
   const [showDropdown, setShowDropdown] = useState(false);
@@ -30,17 +30,12 @@ const NavBar = ({ score, highScore, streak }) => {
       <nav className="bg-[#111111]/90 border-b border-[#2A2A2A] backdrop-blur-sm fixed top-0 left-0 right-0 z-50">
         <div className="max-w-6xl mx-auto px-4 py-3">
           <div className="flex flex-col gap-4 md:gap-0 md:flex-row md:items-center md:justify-between">
-            {/* Title and Stats Section */}
             <div className="flex items-center justify-between">
               <h1 className="text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-violet-400 to-fuchsia-400">
                 اختبار حفظ القرآن
               </h1>
             </div>
 
-            {/* Stats Display */}
-            
-
-            {/* User Profile Section */}
             <div className="flex items-center gap-4">
               {user ? (
                 <div className="relative">
@@ -96,7 +91,7 @@ const NavBar = ({ score, highScore, streak }) => {
                 </div>
               ) : (
                 <button
-                  onClick={() => {}} // Add your login modal here
+                  onClick={() => openModal('login')} // Open the login modal
                   className="bg-gradient-to-r from-violet-600 to-fuchsia-600 text-white px-6 py-2 rounded-xl"
                 >
                   تسجيل الدخول
@@ -122,11 +117,13 @@ const NavBar = ({ score, highScore, streak }) => {
               >
                 إغلاق
               </button>
-              
+
               {modalContent === 'profile' ? (
                 <ProfileSettings onClose={() => setShowModal(false)} />
-              ) : (
+              ) : modalContent === 'settings' ? (
                 <AccountSettings onClose={() => setShowModal(false)} />
+              ) : (
+                <LoginModal onClose={() => setShowModal(false)} />
               )}
             </div>
           </motion.div>
@@ -136,4 +133,4 @@ const NavBar = ({ score, highScore, streak }) => {
   );
 };
 
-export default NavBar; 
+export default NavBar;
