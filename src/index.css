@@ -1,0 +1,140 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    font-family: 'Amiri', sans-serif;
+    direction: rtl;
+  }
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background: linear-gradient(135deg, #f6f8fb 0%, #e9eef5 100%);
+  color: #2d3748;
+  text-align: center;
+  min-height: 100vh;
+}
+
+.app {
+  padding: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.card {
+  background: rgba(255, 255, 255, 0.95);
+  padding: 2rem;
+  margin: 2rem auto;
+  border-radius: 1rem;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+  max-width: 800px;
+  transition: transform 0.2s;
+}
+
+.card:hover {
+  transform: translateY(-2px);
+}
+
+.ayah {
+  font-size: 2rem;
+  line-height: 1.6;
+  margin-bottom: 2rem;
+  color: #1a202c;
+}
+
+.options {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1rem;
+  margin: 2rem 0;
+}
+
+.option {
+  padding: 1rem 1.5rem;
+  font-size: 1.2rem;
+  background: #fff;
+  border: 2px solid #e2e8f0;
+  border-radius: 0.75rem;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.option:hover:not(:disabled) {
+  background: #f7fafc;
+  border-color: #cbd5e0;
+  transform: translateY(-2px);
+}
+
+.correct {
+  background: #9ae6b4 !important;
+  border-color: #68d391 !important;
+  color: #276749 !important;
+}
+
+.incorrect {
+  background: #feb2b2 !important;
+  border-color: #fc8181 !important;
+  color: #9b2c2c !important;
+}
+
+.feedback {
+  margin-top: 20px;
+}
+
+.correct-text {
+  color: #22c55e;
+  font-size: 18px;
+}
+
+.incorrect-text {
+  color: #ef4444;
+  font-size: 18px;
+}
+
+.next-button {
+  padding: 1rem 2rem;
+  font-size: 1.2rem;
+  background: #4299e1;
+  color: white;
+  border: none;
+  border-radius: 0.75rem;
+  cursor: pointer;
+  transition: all 0.2s;
+  margin-top: 1.5rem;
+}
+
+.next-button:hover {
+  background: #3182ce;
+  transform: translateY(-2px);
+}
+
+.audio-player {
+  width: 100%;
+  margin: 1.5rem 0;
+}
+
+.loading-spinner {
+  border: 4px solid #f3f3f3;
+  border-top: 4px solid #3498db;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  animation: spin 1s linear infinite;
+  margin: 2rem auto;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.ltr {
+  direction: ltr;
+}
+
+.direction-ltr {
+  direction: ltr !important;
+}
